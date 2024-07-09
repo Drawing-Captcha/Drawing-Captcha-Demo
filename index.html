@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <title>Drawing-Captcha-Demo</title>
+</head>
+
+<body>
+    <!-- Template by  https://codepen.io/krisantuswanandi/pen/KxrgeZ-->
+    <div class="background">
+        <div class="container">
+            <div class="screen">
+                <div class="screen-header">
+                    <div class="screen-header-left">
+                        <div class="screen-header-button close"></div>
+                        <div class="screen-header-button maximize"></div>
+                        <div class="screen-header-button minimize"></div>
+                    </div>
+                    <div class="screen-header-right">
+                        <div class="screen-header-ellipsis"></div>
+                        <div class="screen-header-ellipsis"></div>
+                        <div class="screen-header-ellipsis"></div>
+                    </div>
+                </div>
+                <div class="screen-body">
+                    <div class="screen-body-item left">
+                        <div class="app-title">
+                            <span>Contact Me 🚀</span>
+                        </div>
+                        <div class="app-contact">CONTACT INFO: info@wpesic.dev</div>
+                    </div>
+                    <div class="screen-body-item">
+                        <form drawing-captcha class="app-form" id="contactForm" action="./success.html">
+                            <div class="app-form-group">
+                                <input class="app-form-control" type="text" id="name" placeholder="Your Name">
+                            </div>
+                            <div class="app-form-group">
+                                <input class="app-form-control" type="email" id="email" placeholder="EMAIL">
+                            </div>
+                            <div class="app-form-group message">
+                                <input class="app-form-control" type="text" id="message" placeholder="MESSAGE">
+                            </div>
+                            <div class="app-form-group buttons">
+                                <button type="reset" class="app-form-button">CANCEL</button>
+                                <button type="submit" class="app-form-button">SEND</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/Drawing-Captcha-Alpha/captcha.js" onload="(function(){initializeCaptcha()})()"></script>
+    <script>
+        var CaptchaHiddenAPIKey = "ba310fba-352b-408a-bb24-512a60f90c9a";
+        var CaptchaServerWithPort = "https://drawing.wpesic.dev";
+    </script>    
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            var name = document.getElementById('name').value;
+            localStorage.setItem('contactName', name);
+        });
+    </script>
+</body>
+
+</html>
