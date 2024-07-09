@@ -295,7 +295,7 @@ body {
     transition: all .2s ease-out;
 }
 
-@media only screen and (max-width: 600px){
+@media only screen and (max-width: 800px){
     .captcha-inner-wrapper {
         background: rgba(255, 255, 255, 0.6);
         backdrop-filter: blur(10px);
