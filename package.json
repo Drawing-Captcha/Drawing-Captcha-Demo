@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@drawing-captcha/drawing-captcha-frontend": "^1.0.1"
+    "@drawing-captcha/drawing-captcha-frontend": "^1.0.2"
   }
 }
