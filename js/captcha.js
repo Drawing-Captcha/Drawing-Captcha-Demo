@@ -26,8 +26,9 @@ class CaptchaComponent extends HTMLElement {
             this.captchaTitle = this.shadowRoot.querySelector('.title')
             this.testConnection().then((result) => {
                 if (result === true) {
+                    this.initialize();
                     this.getColorKit().then(() => {
-                        this.captchaTitle.textContent = this.colorKitTitle
+                        this.captchaTitle.textContent = this.itemTitle ?? this.colorKitTitle
                         this.customStyle.textContent += /* CSS */`
                             :host {
                                 --drawing-captcha-cube-hovering-color: ${this.cubeHoverColor};
@@ -37,7 +38,6 @@ class CaptchaComponent extends HTMLElement {
                             }
                         `
                     });
-                    this.initialize();
                 }
             });
         }
@@ -538,7 +538,8 @@ class CaptchaComponent extends HTMLElement {
                     background.style.backgroundSize = `${itemAssets.backgroundSize}%`;
                     this.saveSession(data.client);
                     console.log(itemAssets)
-                    this.captchaTitle.textContent = itemAssets.itemTitle;
+                    this.itemTitle = itemAssets.itemTitle
+                    this.captchaTitle.textContent = this.itemTitle;
     
                 } else {
                     throw new Error('Error in server response: Missing client data.');
