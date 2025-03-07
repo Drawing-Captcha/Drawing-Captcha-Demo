@@ -538,11 +538,7 @@ class CaptchaComponent extends HTMLElement {
                     background.style.backgroundSize = `${itemAssets.backgroundSize}%`;
                     this.saveSession(data.client);
                     console.log(itemAssets)
-
-                    if(itemAssets.itemTitle.length > 0) {
-                        console.log("hastitile")
-                        this.captchaTitle.textContent = itemAssets.itemTitle;
-                    }
+                    this.captchaTitle.textContent = itemAssets.itemTitle;
     
                 } else {
                     throw new Error('Error in server response: Missing client data.');
