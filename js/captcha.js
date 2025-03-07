@@ -537,7 +537,7 @@ class CaptchaComponent extends HTMLElement {
                     background.style.backgroundImage = `url(${CaptchaServerWithPort}${backgroundImageUrl})`;
                     background.style.backgroundSize = `${itemAssets.backgroundSize}%`;
                     this.saveSession(data.client);
-
+                    console.log(itemAssets)
                     if(itemAssets.itemTitle.length > 0) {
                         this.captchaTitle.textContent = itemAssets.itemTitle;
                     }
