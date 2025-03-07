@@ -26,9 +26,8 @@ class CaptchaComponent extends HTMLElement {
             this.captchaTitle = this.shadowRoot.querySelector('.title')
             this.testConnection().then((result) => {
                 if (result === true) {
-                    this.initialize();
                     this.getColorKit().then(() => {
-                        this.captchaTitle.textContent = this.itemTitle ?? this.colorKitTitle
+                        this.captchaTitle.textContent = this.colorKitTitle
                         this.customStyle.textContent += /* CSS */`
                             :host {
                                 --drawing-captcha-cube-hovering-color: ${this.cubeHoverColor};
@@ -37,6 +36,7 @@ class CaptchaComponent extends HTMLElement {
                                 --drawing-captcha-button-hover-background-color: ${this.buttonHoverColor};
                             }
                         `
+                        this.initialize();
                     });
                 }
             });
@@ -409,8 +409,7 @@ class CaptchaComponent extends HTMLElement {
         const response = await fetch(`${CaptchaServerWithPort}/test/`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Cache-Control': 'no-store'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ apiKey: CaptchaHiddenAPIKey })
         });
@@ -422,7 +421,6 @@ class CaptchaComponent extends HTMLElement {
             }
             else {
                 console.log("Failed to connect to server")
-                this.showConnectionError();
                 return false;
             }
         }
@@ -520,8 +518,7 @@ class CaptchaComponent extends HTMLElement {
             const response = await fetch(`${CaptchaServerWithPort}/captcha/assets`, {
                 method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Cache-Control': 'no-store'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ apiKey: CaptchaHiddenAPIKey, session: await this.getSession() })
             });
@@ -537,10 +534,7 @@ class CaptchaComponent extends HTMLElement {
                     background.style.backgroundImage = `url(${CaptchaServerWithPort}${backgroundImageUrl})`;
                     background.style.backgroundSize = `${itemAssets.backgroundSize}%`;
                     this.saveSession(data.client);
-                    console.log(itemAssets)
-                    this.itemTitle = itemAssets.itemTitle
-                    this.captchaTitle.textContent = this.itemTitle;
-    
+                    this.captchaTitle.textContent = itemAssets.itemTitle ?? this.colorKitTitle;
                 } else {
                     throw new Error('Error in server response: Missing client data.');
                 }
@@ -567,8 +561,7 @@ class CaptchaComponent extends HTMLElement {
         fetch(`${CaptchaServerWithPort}/captcha/reload`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Cache-Control': 'no-store'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ apiKey: CaptchaHiddenAPIKey, session: await this.getSession() })
         })
@@ -587,8 +580,7 @@ class CaptchaComponent extends HTMLElement {
             const response = await fetch(`${CaptchaServerWithPort}/captcha/captchaSettings`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Cache-Control': 'no-store'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ apiKey: CaptchaHiddenAPIKey })
             });
@@ -626,8 +618,7 @@ class CaptchaComponent extends HTMLElement {
             const response = await fetch(`${CaptchaServerWithPort}/captcha/checkCubes`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Cache-Control': 'no-store'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     selectedIds: selectedIds,
@@ -660,8 +651,7 @@ class CaptchaComponent extends HTMLElement {
         const response = await fetch(`${CaptchaServerWithPort}/captcha/check-captcha`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Cache-Control': 'no-store'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 apiKey: CaptchaHiddenAPIKey,
