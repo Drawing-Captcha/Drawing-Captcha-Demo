@@ -126,12 +126,12 @@ class CaptchaComponent extends HTMLElement {
 
     renderCSS() {
         this.customStyle = document.createElement('style')
-        this.customStyle.textContent = /* CSS */` 
+        this.customStyle.textContent = /* CSS */`
             * {
                 padding: var(--drawing-captcha-universal-padding, 0);
                 margin: var(--drawing-captcha-universal-margin, 0);
             }
-        
+
             dialog {
                 width: var(--drawing-captcha-dialog-width, 100%);
                 max-width: var(--drawing-captcha-dialog-max-width, -webkit-fill-available);
@@ -140,7 +140,7 @@ class CaptchaComponent extends HTMLElement {
                 background: var(--drawing-captcha-dialog-background, none);
                 border: var(--drawing-captcha-dialog-border, none);
             }
-            
+
             .captcha-wrapper {
                 width: var(--drawing-captcha-wrapper-width, 100%);
                 height: var(--drawing-captcha-wrapper-height, 100%);
@@ -148,17 +148,18 @@ class CaptchaComponent extends HTMLElement {
                 justify-content: center;
                 align-items: center;
             }
-            
+
             .captcha-container {
                 color: var(--drawing-captcha-container-color, white);
                 font-family: var(--drawing-captcha-container-font, Arial, Helvetica, sans-serif);
-                max-width: var(--drawing-captcha-container-max-width, 100%);
+                max-width: var(--drawing-captcha-container-max-width, 500px);
+                width: var(--drawin-captcha-container-width, 100%);
                 overflow-x: var(--drawing-captcha-container-overflow-x, hidden);
                 display: flex;
                 flex-direction: column;
                 background-color: var(--drawing-captcha-container-background-color, white);
                 border-radius: var(--drawing-captcha-container-border-radius, 0.6em);
-                padding: var(--drawing-captcha-container-padding, 2em);
+                padding: var(--drawing-captcha-container-padding, 30px);
                 text-align: var(--drawing-captcha-container-text-align, center);
                 box-shadow: var(--drawing-captcha-container-box-shadow, 0px 0px 10px rgba(0, 0, 0, 0.5));
                 animation: var(--drawing-captcha-container-animation, fadeIn 0.5s ease-in);
