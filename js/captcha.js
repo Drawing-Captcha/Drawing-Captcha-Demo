@@ -116,15 +116,15 @@ class CaptchaComponent extends HTMLElement {
 
     }
 
-    shouldRenderCSS () {
+    shouldRenderCSS() {
         return !this.shadowRoot.querySelector('style')
     }
 
-    shouldRenderHTML () {
+    shouldRenderHTML() {
         return !this.shadowRoot.querySelector('.captcha-wrapper')
     }
 
-    renderCSS () {
+    renderCSS() {
         this.customStyle = document.createElement('style')
         this.customStyle.textContent = /* CSS */` 
             * {
@@ -152,8 +152,8 @@ class CaptchaComponent extends HTMLElement {
             .captcha-container {
                 color: var(--drawing-captcha-container-color, white);
                 font-family: var(--drawing-captcha-container-font, Arial, Helvetica, sans-serif);
-                max-width: var(--drawing-captcha-container-max-width, 40em);
-                width: var(--drawing-captcha-container-width, auto);
+                max-width: var(--drawing-captcha-container-max-width, 100%);
+                overflow-x: var(--drawing-captcha-container-overflow-x, hidden);
                 display: flex;
                 flex-direction: column;
                 background-color: var(--drawing-captcha-container-background-color, white);
@@ -167,14 +167,14 @@ class CaptchaComponent extends HTMLElement {
             }
             
             .captchta-canvas {
-                width: var(--drawing-captcha-captchta-canvas-width, max-content);
+                width: var(--drawing-captcha-captchta-canvas-width, 100%);
                 display: grid;
                 grid-template-columns: var(--drawing-captcha-captchta-canvas-grid-columns, 1fr);
                 grid-template-rows: var(--drawing-captcha-captchta-canvas-grid-rows, 1fr);
                 margin: var(--drawing-captcha-captchta-canvas-margin, 0 auto);
                 max-width: var(--drawing-captcha-captchta-canvas-max-width, 100%);
                 align-items: var(--drawing-captcha-captchta-canvas-align-items, end);
-                overflow: var(--drawing-captcha-captchta-canvas-overflow, overlay);
+                overflow: var(--drawing-captcha-captchta-canvas-overflow, hidden);
                 max-height: var(--drawing-captcha-captchta-canvas-max-height, 90vh);
             }
             
@@ -199,12 +199,14 @@ class CaptchaComponent extends HTMLElement {
             
             .canvas {
                 display: grid;
-                grid-template-columns: var(--drawing-captcha-canvas-grid-columns, repeat(31, 1.2em));
-                grid-template-rows: var(--drawing-captcha-canvas-grid-rows, repeat(31, 1.2em));
+                height: 100%;
+                aspect-ratio: 1;
+                grid-template-columns: var(--drawing-captcha-canvas-grid-columns, repeat(31, 1fr));
+                grid-template-rows: var(--drawing-captcha-canvas-grid-rows, repeat(31, 1fr));
                 border: var(--drawing-captcha-canvas-border, 3px solid black);
                 border-radius: var(--drawing-captcha-canvas-border-radius, 5px);
                 max-width: var(--drawing-captcha-canvas-max-width, 100%);
-                width: var(--drawing-captcha-canvas-width, fit-content);
+                width: var(--drawing-captcha-canvas-width, auto);
                 background-position: var(--drawing-captcha-canvas-background-position, center);
                 background-size: var(--drawing-captcha-canvas-background-size, 70%);
                 background-repeat: var(--drawing-captcha-canvas-background-repeat, no-repeat);
@@ -270,7 +272,9 @@ class CaptchaComponent extends HTMLElement {
             
             .background-pattern {
                 position: relative;
-                width: var(--drawing-captcha-background-pattern-width, fit-content);
+                width: var(--drawing-captcha-background-pattern-width, 100%);
+                max-width: var(--drawing-captcha-background-pattern-max-width, 100%);
+                overflow: var(--drawing-captcha-background-pattern-overflow, hidden);
                 height: var(--drawing-captcha-background-pattern-height, fit-content);
             }
             
@@ -279,10 +283,6 @@ class CaptchaComponent extends HTMLElement {
             }
             
             @media screen and (max-width: 676px) {
-                .canvas {
-                    grid-template-columns: var(--drawing-captcha-canvas-small-grid-columns, repeat(31, 1em)) !important;
-                    grid-template-rows: var(--drawing-captcha-canvas-small-grid-rows, repeat(31, 1em)) !important;
-                }
             
                 .title {
                     font-size: var(--drawing-captcha-title-small-font-size, large);
@@ -299,49 +299,31 @@ class CaptchaComponent extends HTMLElement {
             
             @media screen and (max-width: 500px) {
                 .captcha-container {
-                    max-width: var(--drawing-captcha-captcha-container-max-width-small, 39em);
                     padding: var(--drawing-captcha-captcha-container-padding-small, 4%);
                     margin: var(--drawing-captcha-captcha-container-margin-small, 1em);
 
-                }
-            
-                .canvas {
-                    grid-template-columns: var(--drawing-captcha-canvas-small-grid-columns, repeat(31, 1.1em)) !important;
-                    grid-template-rows: var(--drawing-captcha-canvas-small-grid-rows, repeat(31, 1.1em)) !important;
                 }
             }
 
             @media screen and (max-width: 480px) {
                 .captcha-container {
-                    max-width: var(--drawing-captcha-captcha-container-max-width-small, 39em);
                     padding: var(--drawing-captcha-captcha-container-padding-small, 4%);
                     margin: var(--drawing-captcha-captcha-container-margin-small, 1em);
 
-                }
-            
-                .canvas {
-                    grid-template-columns: var(--drawing-captcha-canvas-small-grid-columns, repeat(31, 1em)) !important;
-                    grid-template-rows: var(--drawing-captcha-canvas-small-grid-rows, repeat(31, 1em)) !important;
                 }
             }
 
             @media screen and (max-width: 440px) {
                 .captcha-container {
-                    max-width: var(--drawing-captcha-captcha-container-max-width-small, 39em);
                     padding: var(--drawing-captcha-captcha-container-padding-small, 4%);
                     margin: var(--drawing-captcha-captcha-container-margin-small, 1em);
 
-                }
-            
-                .canvas {
-                    grid-template-columns: var(--drawing-captcha-canvas-small-grid-columns, repeat(31, 0.79em)) !important;
-                    grid-template-rows: var(--drawing-captcha-canvas-small-grid-rows, repeat(31, 0.79em)) !important;
                 }
             }
         `;
     }
 
-    renderHTML () {
+    renderHTML() {
         this.dialog = document.createElement('dialog');
         const template = document.createElement('template');
         template.innerHTML = /* HTML */ `
@@ -405,34 +387,38 @@ class CaptchaComponent extends HTMLElement {
         await this.getAssets();
         this.reset()
     }
-    async testConnection () {
-        const response = await fetch(`${CaptchaServerWithPort}/test/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ apiKey: CaptchaHiddenAPIKey })
-        });
-        if (response.ok) {
-            const data = await response.json();
-            if (data.connection) {
-                console.log("Connected to server")
-                return true;
-            }
-            else {
-                console.log("Failed to connect to server")
-                return false;
-            }
-        }
-        else{            
-            if(response.type === 'cors') {
-                console.log("Failed to connect to server: Origin not allowed with this apiKey | Drawing-Captcha disconnected")
+    async testConnection() {
+        try {
+            const response = await fetch(`${CaptchaServerWithPort}/test/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ apiKey: CaptchaHiddenAPIKey })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.connection) {
+                    console.log("Connected to server");
+                    return true;
+                } else {
+                    console.log("Failed to connect to server");
+                    return false;
+                }
+            } else {
+                let errorMessage = `Failed to connect to server: ${response.status} ${response.statusText}`;
+                if (response.type === 'cors') {
+                    errorMessage += " | Origin not allowed with this apiKey | Drawing-Captcha disconnected";
+                }
+                console.error(errorMessage);
                 this.showConnectionError();
                 return false;
-
             }
+        } catch (error) {
+            console.error("Error during connection test:", error.message);
+            this.showConnectionError();
             return false;
-            throw new Error(`Failed to connect to server: ${response.status} ${response.statusText}`);
         }
     }
 
@@ -440,7 +426,7 @@ class CaptchaComponent extends HTMLElement {
     async showConnectionError() {
         const dialog = document.createElement('dialog');
         dialog.classList.add('connection-error-dialog');
-    
+
         const style = document.createElement('style');
         style.textContent = `
             .connection-error-dialog {
@@ -495,7 +481,7 @@ class CaptchaComponent extends HTMLElement {
             }
         `;
         document.head.appendChild(style);
-    
+
         const message = document.createElement('div');
         message.innerHTML = `
             <p><strong>Drawing-Captcha Connection Error</strong></p>
@@ -503,12 +489,12 @@ class CaptchaComponent extends HTMLElement {
             <button>Close</button>
             <a href="https://docs.drawing-captcha.com/documentation/apis/" target="_blank">Troubleshooting</a>
         `;
-    
+
         message.querySelector('button').addEventListener('click', () => {
             dialog.close();
             dialog.remove();
         });
-    
+
         dialog.appendChild(message);
         document.body.appendChild(dialog);
         dialog.showModal();
@@ -526,7 +512,7 @@ class CaptchaComponent extends HTMLElement {
             if (response.ok) {
                 const data = await response.json();
                 if (data.client) {
-                    this.client  = data.client
+                    this.client = data.client
                     this.assets = data.client.itemAssets;
                     const backgroundImageUrl = this.assets.finishedURL;
                     const background = this.captchaCanvas;
@@ -613,7 +599,7 @@ class CaptchaComponent extends HTMLElement {
         const selectedCubes = Array.from(this.shadowRoot.querySelectorAll('.cube'))
             .filter(cube => cube.classList.contains('selected'));
         const selectedIds = selectedCubes.map(cube => cube.id);
-    
+
         try {
             const response = await fetch(`${CaptchaServerWithPort}/captcha/checkCubes`, {
                 method: 'POST',
@@ -627,13 +613,13 @@ class CaptchaComponent extends HTMLElement {
                     session: await this.getSession()
                 })
             });
-    
+
             if (!response.ok) {
                 throw new Error('Server request failed.');
             }
-    
+
             const data = await response.json();
-            
+
             if (data.isValid) {
                 alert("Validation successful!");
                 this.validateCaptcha(true);
@@ -646,7 +632,7 @@ class CaptchaComponent extends HTMLElement {
             alert('An error occurred. Please try again later.');
         }
     }
-    
+
     async isCaptchaStillValid() {
         const response = await fetch(`${CaptchaServerWithPort}/captcha/check-captcha`, {
             method: 'POST',
@@ -661,7 +647,7 @@ class CaptchaComponent extends HTMLElement {
         const data = await response.json();
         return data.valid;
     }
-    
+
     async displayCaptchaAndSubmit(form) {
         const isValid = await this.isCaptchaStillValid();
         if (isValid) {
@@ -685,7 +671,7 @@ class CaptchaComponent extends HTMLElement {
             this.captchaFailed();
         }
     }
-    
+
 
     async getSession() {
         const sessionString = sessionStorage.getItem("session");
