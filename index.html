@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Try the Drawing Captcha demo! Experience an innovative, brand-new drawing-based captcha system seamlessly integrated into a modern contact form. Enhance security and user experience with Drawing Captcha.">
+    <meta name="description"
+        content="Try the Drawing Captcha demo! Experience an innovative, brand-new drawing-based captcha system seamlessly integrated into a modern contact form. Enhance security and user experience with Drawing Captcha.">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
     <title>Try out Drawing Captcha</title>
@@ -55,13 +56,12 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
     <script>
         var CaptchaHiddenAPIKey = "6f1cd6f7-4fde-421d-91e3-0096845c2011";
         var CaptchaServerWithPort = "https://drawing.wpesic.dev";
-    </script> 
-    <script src="https://cdn.drawing-captcha.com/captcha.js" onload="initializeCaptcha()"></script>
+    </script>
+    <script src="https://cdn.drawing-captcha.com/captcha.js" onload="(function(){initializeCaptcha()})()"></script>
 
     <script>
         document.getElementById('contactForm').addEventListener('submit', function (event) {
