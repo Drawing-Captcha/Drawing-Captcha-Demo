@@ -17,14 +17,26 @@
   
   .background {
     display: flex;
+    flex-direction: column;
     min-height: 100vh;
   }
+  .logo {
+    width: 30em;
+    height: auto;
+}
   
   .container {
+    gap: 2rem;
     flex: 0 1 700px;
     margin: auto;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: -webkit-fill-available;
   }
+
   
   .screen {
     position: relative;
