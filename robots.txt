@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://demo.drawing-captcha.com/sitemap.xml
+
